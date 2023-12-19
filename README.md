@@ -69,7 +69,7 @@ Make sure to logout and log back in so usermod takes effect.
 
 8. Connect radar + DCA1000EVM to the host (see [Hardware Setup](#Hardware-Setup)). Set host + DCA1000EVM IPs and ports accordingly.
   
-9. Edit and launch a ```.launch``` file i.e. 
+9. Edit and launch a ```.launch``` file e.g.
 ```bash 
 roslaunch xwr_raw_ros radar_visra.launch
 ```
