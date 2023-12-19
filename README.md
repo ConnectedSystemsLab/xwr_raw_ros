@@ -75,7 +75,7 @@ Make sure to logout and log back in so usermod takes effect.
 ```bash 
 roslaunch xwr_raw_ros radar_visra.launch
 ```
-Make sure the parameters (e.g. IP addresses and ports, serial ports, radar config) in the ```.launch``` file are correct. You should see an output similar to ```example.mp4```.
+Make sure the parameters (e.g. IP addresses and ports, serial ports, radar config) in the ```.launch``` file are correct. You should see an output similar to ```example.mp4``` if using xWR1843.
 
 ## Hardware Setup 
 
