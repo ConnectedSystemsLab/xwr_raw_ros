@@ -1,0 +1,11 @@
+pyserial
+numpy==1.21
+scipy
+matplotlib
+opencv-python
+pillow
+imageio
+imageio-ffmpeg
+numba
+rospkg
+openvino

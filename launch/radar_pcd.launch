@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+
+<launch>
+    <!-- Radar. -->
+    <arg name="radar0"                 default="radar0"/>
+    <arg name="radar0_cfg"             default="configs/1843aop/1843aop_range_v1.cfg"/>
+    <arg name="radar0_cmd_tty"         default="/dev/ttyISK_00"/>
+    <arg name="radar0_data_tty"        default="/dev/ttyISK_01"/>
+    <arg name="radar0_dca_ip"          default="192.168.33.180"/>
+    <arg name="radar0_dca_cmd_port"    default="4096"/>
+    <arg name="radar0_host_ip"         default="192.168.33.30"/>
+    <arg name="radar0_host_cmd_port"   default="4096"/>
+    <arg name="radar0_host_data_port"  default="4098"/>
+
+    <group ns="$(arg radar0)">
+        <node name="dca" pkg="xwr_raw_ros" type="dca.py" required="true"  output="screen"
+            args="$(find xwr_raw_ros)/$(arg radar0_cfg)
+                  --dca_ip=$(arg radar0_dca_ip) 
+                  --dca_cmd_port=$(arg radar0_dca_cmd_port) 
+                  --host_ip=$(arg radar0_host_ip) 
+                  --host_cmd_port=$(arg radar0_host_cmd_port) 
+                  --host_data_port=$(arg radar0_host_data_port)"/>
+
+        <!-- <node name="xwr_visualizer" pkg="xwr_raw_ros" type="visda.py" args="" output="screen"/> -->
+
+        <node pkg="ti_mmwave_rospkg" type="ti_mmwave_rospkg" name="ti_mmwave" output="screen">
+            <param name="command_port" value="$(arg radar0_cmd_tty)"  />
+            <param name="command_rate" value="115200"   />
+            <param name="data_port" value="$(arg radar0_data_tty)"  />
+            <param name="data_rate" value="921600"   />
+            <param name="max_allowed_elevation_angle_deg" value="90"   />
+            <param name="max_allowed_azimuth_angle_deg" value="90"   />
+            <param name="frame_id" value="/ti_mmwave_0"/>
+            <param name="mmWaveCLI_name" value="/$(arg radar0)/mmWaveCLI" />
+            <remap from="/ti_mmwave/radar_scan_pcl" to="/ti_mmwave/radar_scan_pcl_0"/>
+        </node>
+
+        <!-- mmWaveQuickConfig node (terminates after configuring mmWave sensor) -->
+        <node pkg="ti_mmwave_rospkg" type="mmWaveQuickConfig" name="ti_mmwave_config" 
+            args="$(find xwr_raw_ros)/$(arg radar0_cfg)" output="screen" >
+            <param name="mmWaveCLI_name" value="/$(arg radar0)/mmWaveCLI" />
+        </node>
+
+    </group>
+
+    <node pkg="tf" type="static_transform_publisher" name="radar_baselink_0" 
+        args="0 0 0 0 0 0 ti_mmwave_pcl ti_mmwave_0 100"/>
+    <node pkg="rviz" type="rviz" name="rviz" 
+        args="-d $(find ti_mmwave_rospkg)/launch/rviz/ti_mmwave_multi.rviz"/>
+
+</launch>

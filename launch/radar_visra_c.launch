@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<launch>
+    <arg name="radar1"                 default="radar1"/>
+    <arg name="radar1_cfg"             default="configs/1843aop/1843aop_range_v1.cfg"/>
+    <arg name="radar1_cmd_tty"         default="/dev/ttyISK_00"/>
+    <arg name="radar1_dca_ip"          default="192.168.33.180"/>
+    <arg name="radar1_dca_cmd_port"    default="4096"/>
+    <arg name="radar1_host_ip"         default="192.168.33.30"/>
+    <arg name="radar1_host_cmd_port"   default="4096"/>
+    <arg name="radar1_host_data_port"  default="4098"/>
+
+    <group ns="$(arg radar1)">
+        <node name="xwr_radar" pkg="xwr_raw_ros" type="radar_cfg.py" required="true"  output="screen"
+            args="$(arg radar1_cfg)  
+            --cmd_tty=$(arg radar1_cmd_tty)  
+            --dca_ip=$(arg radar1_dca_ip) 
+            --dca_cmd_port=$(arg radar1_dca_cmd_port) 
+            --host_ip=$(arg radar1_host_ip) 
+            --host_cmd_port=$(arg radar1_host_cmd_port)"/>
+
+        <node name="xwr_recver" pkg="xwr_raw_ros" type="recver" output="screen"
+            args="_host_ip:=$(arg radar1_host_ip) 
+            _host_data_port:=$(arg radar1_host_data_port)" 
+            launch-prefix="bash -c 'sleep 2.0; $0 $@' "/>
+
+        <node name="xwr_visualizer" pkg="xwr_raw_ros" type="visra.py" args="" output="screen"/>
+    </group>
+
+</launch>
