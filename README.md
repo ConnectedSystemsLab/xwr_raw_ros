@@ -1,7 +1,7 @@
 # xwr_raw_ros
 
-**ROS node for real-time raw ADC I/Q sample data capture and processing from TI AWR/IWR radar EVMs + DCA1000EVM combo.** 
-Developed and used in the following papers:
+This repository contains a **ROS node for real-time raw ADC I/Q sample data capture and processing from TI AWR/IWR radar EVMs + DCA1000EVM combo.** 
+It was developed for and used in the following papers:
 
 > **[BatMobility: Towards Flying Without Seeing for Autonomous Drones](https://dl.acm.org/doi/10.1145/3570361.3592532)**  
 > Emerson Sie, Zikun Liu, Deepak Vasisht    
@@ -16,9 +16,10 @@ https://github.com/ConnectedSystemsLab/xwr_raw_ros/assets/14133352/1cef32bf-e6d5
 ## Features
 - Tested on **ROS Melodic/Noetic**, **Ubuntu 18.04/20.04**.
 - Tested on **xWR1843, xWR6843ISK, xWR6843ISK-ODS, xWR2944, xWR1843AOP, xWR6843AOP**
+- Can be used to collect I/Q samples and point clouds at the same time (see ```example.mp4```).
 
 ## Organization
-- `configs/` - Sample radar configs.
+- `configs/` - Example radar configs.
 - `nodes/`
     - `radar.py` - Starts radar EVM and publishes data from DCA1000 EVM.
     - `visra.py` - Subscribes to radar samples to visualize range-azimuth heatmaps.
@@ -31,10 +32,11 @@ https://github.com/ConnectedSystemsLab/xwr_raw_ros/assets/14133352/1cef32bf-e6d5
 - `launch/` 
     - `radar.launch` - Run raw sample node.
     - `radar_pcd.launch` - Visualize point cloud + get raw samples at same time.
+        - To run this, make sure you have installed [ti_mmwave_rospkg](https://github.com/radar-lab/ti_mmwave_rospkg) as well.
     - `radar_visra.launch` - Visualize range-azimuth heatmaps from raw samples in real-time.
     - `radar_visda.launch` - Visualize doppler-azimuth heatmaps from raw samples in real-time.
     - `radar_visra_c.launch` - Same as above, but with optimized C receiver.
-- `udev/` - udev rules for USB ports.
+- `udev/` - udev rules for USB ports (optional).
  
 ## Getting Started
 
@@ -60,7 +62,7 @@ cd ~/catkin_ws && catkin build
 ```bash
 source devel/setup.bash
 ```
-7. Copy udev rule files under `udev` to `/etc/udev/rules.d` and run 
+7. (Optional) Copy udev rule files under `udev` to `/etc/udev/rules.d` and run 
 ```bash
 sudo udevadm control --reload-rules
 sudo usermod -a -G dialout $USER
@@ -73,7 +75,7 @@ Make sure to logout and log back in so usermod takes effect.
 ```bash 
 roslaunch xwr_raw_ros radar_visra.launch
 ```
-Make sure the parameters (e.g. IP addresses and ports, serial ports, radar config) in the ```.launch``` file are correct. You should see an output similar to example.mp4.
+Make sure the parameters (e.g. IP addresses and ports, serial ports, radar config) in the ```.launch``` file are correct. You should see an output similar to ```example.mp4```.
 
 ## Hardware Setup 
 
@@ -93,6 +95,7 @@ Connect the wires + set pins and switches on the board as follows.
 2. Power the DCA1000EVM through the EVM by pass-through.
 
 ### xWR6843ISK
+Connect the wires + set pins and switches on the board as follows.
 
 <img src="images/awr6843isk.jpg" width="50%" align=left><img src="images/isk_ant.png" width="50%">
 
