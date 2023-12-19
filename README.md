@@ -220,3 +220,6 @@ If you found this repository useful, please cite the following:
   doi        = {https://doi.org/10.48550/arXiv.2311.11260},
 }
 ```
+
+## Acknowledgements
+We would like to thank to [OpenRadar](https://github.com/PreSenseRadar/OpenRadar) and [iwr_raw_rosnode](https://github.com/moodoki/iwr_raw_rosnode) for providing useful help + code snippets.
