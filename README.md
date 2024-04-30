@@ -7,9 +7,9 @@ It was developed for and used in the following papers:
 > Emerson Sie, Zikun Liu, Deepak Vasisht    
 > *ACM International Conference on Mobile Computing and Networking (**MobiCom**), 2023* 
 
-> **[Radarize: Large-Scale Radar SLAM for Indoor Environments](https://arxiv.org/abs/2311.11260)**  
+> **[Radarize: Enhancing Radar SLAM with Generalizable Doppler-Based Odometry](https://arxiv.org/pdf/2311.11260)**  
 > Emerson Sie, Xinyu Wu, Heyu Guo, Deepak Vasisht
->
+> *ACM International Conference on Mobile Systems and Services (**MobiSys**), 2024*
 
 https://github.com/ConnectedSystemsLab/xwr_raw_ros/assets/14133352/1cef32bf-e6d5-48c4-a3ba-73317eed2fce
 
@@ -202,22 +202,22 @@ If you found this repository useful, please cite the following:
 
 ```bibtex
 @inproceedings{sie2023batmobility,
-  author    = {Sie, Emerson and Liu, Zikun and Vasisht, Deepak},
-  title     = {BatMobility: Towards Flying Without Seeing for Autonomous Drones},
-  booktitle = {ACM International Conference on Mobile Computing (MobiCom)},
-  year      = {2023},
-  doi       = {https://doi.org/10.1145/3570361.3592532},
+    author = {Emerson Sie and Zikun Liu and Deepak Vasisht},
+    title = {BatMobility: Towards Flying Without Seeing for Autonomous Drones},
+    booktitle = {The 29th Annual International Conference on Mobile Computing and Networking (ACM MobiCom '23)},
+    year = {2023},
+    doi = {10.1145/3570361.3592532},
+    isbn = {978-1-4503-9990-6/23/10},
 }
 ```
 
 ```bibtex
-@misc{sie2023radarize,
-  title      = {Radarize: {Large}-{Scale} {Radar} {SLAM} for {Indoor} {Environments}},
-  url        = {http://arxiv.org/abs/2311.11260},
-  publisher  = {arXiv},
-  author     = {Sie, Emerson and Wu, Xinyu and Guo, Heyu and Vasisht, Deepak},
-  year       = {2023},
-  doi        = {https://doi.org/10.48550/arXiv.2311.11260},
+@inproceedings{sie2024radarize,
+    author = {Sie, Emerson and Wu, Xinyu and Guo, Heyu and Vasisht, Deepak},
+    title = {Radarize: Enhancing Radar SLAM with Generalizable Doppler-Based Odometry},
+    booktitle = {The 22nd ACM International Conference on Mobile Systems, Applications, and Services (ACM MobiSys '24)}
+    year = {2024},
+    doi = {10.1145/3643832.3661871},
 }
 ```
 
